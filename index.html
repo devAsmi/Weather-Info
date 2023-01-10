@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+    />
+    <title>Weather-Info</title>
+  </head>
+  <body>
+    <!-- navbar section-->
+    <nav class="navbar" style="background-color: #e3f2fd">
+      <a class="navbar-brand" href="#">Weather info</a>
+    </nav>
+    <main class="container-fluid">
+      <div class="row m-2">
+        <!-- header section-->
+        <div class="search w-25">
+          <h2>Searching For a City:</h2>
+          <input
+            name="city"
+            id="city"
+            type="text"
+            class="my-2 w-100"
+            required
+          />
+          <button id="search" class="btn btn-primary w-100">Search</button>
+        </div>
+        <div id="current-weather" class="row w-75"></div>
+      </div>
+      <!-- -->
+    </main>
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.min.js"
+      integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+      crossorigin="anonymous"
+    ></script>
+    <script src="./script.js" />
+  </body>
+</html>
