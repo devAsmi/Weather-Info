@@ -1,6 +1,7 @@
 var APIkey = "278c2aedac9a74a82351d9fea704085d";
 var searchButton = $("#search");
 var currentWeatherContainer = $("#current-weather");
+var date = dayjs().format("MM/DD/YYYY");
 
 function createCard() {
   var cardEl = document.createElement("div");
@@ -39,16 +40,17 @@ searchButton.on("click", function () {
       var long = data.coord.lon;
       var lat = data.coord.lat;
 
+      console.log(date);
+
       var cardEl = document.createElement("div");
-      //   cardEl.classList.add("card");
       $(cardEl).addClass("card");
       var cardBodyEl = document.createElement("div");
-      cardEl.classList.add("card-body");
+      $(cardBodyEl).addClass("card-body");
       var cardTitle = document.createElement("h5");
-      cardTitle.classList.add("card-title");
+      $(cardTitle).addClass("card-title");
 
       // card title
-      cardTitle.textContent = data.name;
+      cardTitle.textContent = data.name + "( " + date + " )";
       cardBodyEl.appendChild(cardTitle);
 
       // create paragraph elements
