@@ -2,3 +2,18 @@
   margin-bottom: 8px;
   border-radius: 0;
 }
+
+.small-card {
+  width: 18%;
+  margin-left: 8px;
+  background: #323d4e;
+  color: white;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .small-card {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+}

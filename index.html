@@ -14,25 +14,32 @@
   <body>
     <!-- navbar section-->
     <nav class="navbar" style="background-color: #e3f2fd">
-      <a class="navbar-brand" href="#">Weather info</a>
+      <h2 class="navbar-text">Weather info</h2>
     </nav>
     <main class="container-fluid">
       <div class="row m-2">
-        <!-- header section-->
-        <div class="search w-25">
-          <h2>Searching For a City:</h2>
-          <input
-            name="city"
-            id="city"
-            type="text"
-            class="my-2 w-100"
-            required
-          />
-          <button id="search" class="btn btn-primary w-100">Search</button>
-          <hr />
-          <ul id="saved-cities" class="col list-group"></ul>
+        <div class="col-lg-3 col-md-4 col-sm-12">
+          <div class="search">
+            <h3>Search for a city:</h3>
+            <input
+              name="city"
+              id="city"
+              type="text"
+              class="my-2 w-100"
+              required
+            />
+            <button id="search" class="btn btn-primary w-100">Search</button>
+            <hr />
+            <ul id="saved-cities" class="col list-group"></ul>
+          </div>
         </div>
-        <div id="current-weather" class="row w-75 h-25"></div>
+
+        <div class="col-lg-9 col-md-8 col-sm-12 w-75">
+          <div id="current-weather" class="row my-4"></div>
+          <div id="future-weather" class="row row-cols-auto"></div>
+        </div>
+
+        <!-- header section-->
       </div>
       <!-- -->
     </main>

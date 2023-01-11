@@ -1,14 +1,16 @@
 var APIkey = "278c2aedac9a74a82351d9fea704085d";
 var searchButton = $("#search");
 var currentWeatherContainer = $("#current-weather");
+var futureWeatherContainer = $("#future-weather");
 var savedCitiesEl = $("#saved-cities");
 var date = dayjs().format("MM/DD/YYYY");
 
-function createCard(title, temp, wind, humidity) {
+function createCard(title, temp, wind, humidity, cardClass) {
   // create div with class card
   // <div class="card">
   var cardEl = document.createElement("div");
   $(cardEl).addClass("card");
+  $(cardEl).addClass(cardClass);
 
   // create a div with class card-body
   // <div class="card-body">
@@ -53,7 +55,22 @@ function get5DayForecast(cityName) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
+      // reset content for future weather container
+      $(futureWeatherContainer).empty();
+      // get 1 single data point for each day so total 5 data point
+      // using 12:00:00 as the time for each day, going up by 8 step for each day
+      for (var i = 4; i < data.list.length; i = i + 8) {
+        var weatherData = data.list[i];
+        var weatherDate = dayjs(weatherData.dt_txt).format("MM/DD/YYYY");
+        var weatherCard = createCard(
+          weatherDate,
+          weatherData.main.temp,
+          weatherData.wind.speed,
+          weatherData.main.humidity,
+          "small-card"
+        );
+        futureWeatherContainer.append(weatherCard);
+      }
     });
 }
 
@@ -76,7 +93,8 @@ function getTodaysForecast(cityName) {
         cardTitle,
         data.main.temp,
         data.wind.speed,
-        data.main.humidity
+        data.main.humidity,
+        ""
       );
       currentWeatherContainer.append(currentWeatherCardEl);
     });
@@ -114,7 +132,18 @@ function getSavedCities() {
   }
 }
 
+function addCityClickListener() {
+  // listen for clicks on any cities in the saved searches
+  $(".list-item-city").on("click", function (event) {
+    event.preventDefault();
+    var city = event.target.textContent;
+    getTodaysForecast(city);
+    get5DayForecast(city);
+  });
+}
+
 getSavedCities();
+addCityClickListener();
 
 // look for all the searched cities in local storage
 searchButton.on("click", function (event) {
@@ -127,16 +156,12 @@ searchButton.on("click", function (event) {
     return;
   }
 
+  // reset input value
   $(inputEl).val("");
+
   saveSearchedCity(cityName);
   getTodaysForecast(cityName);
   get5DayForecast(cityName);
   getSavedCities();
-});
-
-// listen for clicks on any cities in the saved searches
-$(".list-item-city").on("click", function (event) {
-  var city = event.target.textContent;
-  getTodaysForecast(city);
-  get5DayForecast(city);
+  addCityClickListener();
 });
