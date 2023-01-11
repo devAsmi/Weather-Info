@@ -1,14 +1,14 @@
 # Weather-Info
- weather-info is java based application that is used to forecast the weather.
- When we enter a certain city name and search ,it shows 
 
+## Description
 
-GIVEN a weather dashboard with form inputs
-WHEN I search for a city
-THEN I am presented with current and future conditions for that city and that city is added to the search history
-WHEN I view current weather conditions for that city
-THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the wind speed
-WHEN I view future weather conditions for that city
-THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-WHEN I click on a city in the search history
-THEN I am again presented with current and future conditions for that city
+`weather-info` is Javascript based application that displays the current weather and forecasts the weather for next 5 days.
+
+When the user enter a certain city name in the search box, it shows the current weather along with five days forecast. The current weather is presented with the city name, date, temperature, humidity, wind speed, and an icon representing the weather condition.
+Future weather forecast is presented with date, temperature, humidity, wind speed and, an icon representing the weather condition.
+
+User search history is saved as a list in the localStorage and the saved cities will be displayed below the search bar for quick access. By clicking on listed city name, the user can get the weather information for that city.
+
+This application utilizes Bootstrap library for UI, dayJs for date related functions, and jQuery for working with dom elements. It connects to the [Openweathermap API](https://openweathermap.org/current#name) to get the weather information.
+
+## Visuals
