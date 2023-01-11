@@ -41,24 +41,6 @@ function createCard(title, temp, wind, humidity) {
   return cardEl;
 }
 
-// look for all the searched cities in local storage
-searchButton.on("click", function (event) {
-  // get the name of the city that the user entered
-  // if cityName is blank do not do anything
-  event.preventDefault();
-  var inputEl = $("#city");
-  var cityName = $(inputEl).val();
-  if (cityName === "") {
-    return;
-  }
-
-  $(inputEl).val("");
-  saveSearchedCity(cityName);
-  getTodaysForecast(cityName);
-  get5DayForecast(cityName);
-  getSavedCities();
-});
-
 function get5DayForecast(cityName) {
   const url =
     "https://api.openweathermap.org/data/2.5/forecast?q=" +
@@ -105,12 +87,18 @@ function saveSearchedCity(cityName) {
   if (!savedCities) {
     savedCities = [];
   }
+
+  if (savedCities.includes(cityName)) {
+    return;
+  }
   savedCities.push(cityName);
   localStorage.setItem("weather-info-cities", JSON.stringify(savedCities));
 }
 
 function displaySavedCities(cities) {
   // write code to display all the cities
+  // reset before rendering
+  $(savedCitiesEl).empty();
   for (var i = 0; i < cities.length; i++) {
     var liEl = document.createElement("li");
     $(liEl).addClass("list-group-item list-group-item-primary list-item-city");
@@ -127,3 +115,28 @@ function getSavedCities() {
 }
 
 getSavedCities();
+
+// look for all the searched cities in local storage
+searchButton.on("click", function (event) {
+  // get the name of the city that the user entered
+  // if cityName is blank do not do anything
+  event.preventDefault();
+  var inputEl = $("#city");
+  var cityName = $(inputEl).val();
+  if (cityName === "") {
+    return;
+  }
+
+  $(inputEl).val("");
+  saveSearchedCity(cityName);
+  getTodaysForecast(cityName);
+  get5DayForecast(cityName);
+  getSavedCities();
+});
+
+// listen for clicks on any cities in the saved searches
+$(".list-item-city").on("click", function (event) {
+  var city = event.target.textContent;
+  getTodaysForecast(city);
+  get5DayForecast(city);
+});
