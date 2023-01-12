@@ -11,4 +11,10 @@ User search history is saved as a list in the localStorage and the saved cities 
 
 This application utilizes Bootstrap library for UI, dayJs for date related functions, and jQuery for working with dom elements. It connects to the [Openweathermap API](https://openweathermap.org/current#name) to get the weather information.
 
+## Linked to deployed Website
+
+[Deployed Website](https://devasmi.github.io/Weather-Info/)
+
 ## Visuals
+
+![Video of Application](/assets/weather%20forecast.gif)
